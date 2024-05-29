@@ -18,19 +18,29 @@ Tarot reading is a popular practice for gaining insights and guidance, but many 
 
 ### Features
 
-1. **Daily Tarot Card:**
+1.  **Daily Tarot Card:**
 
-   - Users receive a daily tarot card with an interpretation.
+  - Users receive a daily tarot card with an interpretation.
+  - Daily readings are logged and can be reviewed in a history log.
 
 2. **Tarot Reading Game:**
-   - **Tarot for Decision Making:**
+
+  - **Tarot for Decision Making:**
      - **Category Selection:** Users select a decision they need guidance on (e.g., Career Change, Relationship Choice, Major Purchase).
      - **Card Selection:** Users draw three cards representing Pros, Cons, and Outcome.
      - **Interpretations:** Each card provides insights into the advantages, disadvantages, and likely outcome of the decision, helping users make informed choices.
-   - **Dream Tarot Interpretation:**
+  - **Dream Tarot Interpretation:**
      - **Category Selection:** Users choose a dream theme they want to explore (e.g., Recurring Dreams, Nightmares, Lucid Dreams).
      - **Card Selection:** Users draw three cards that symbolize the underlying messages of the dream (e.g., Hidden Fears, Desires, Warnings).
      - **Interpretations:** Each card is interpreted in the context of dream symbolism and the chosen theme, providing deeper understanding of the dream.
+  - **Card Selection Process:**
+     1. Shuffle the deck and display the full set of tarot cards in the frontend.
+     2. Let users select the reading type (decision making or dream interpretation).
+     3. Allow users to choose three cards from the shuffled deck. These cards represent Pros, Cons, and Outcome (for decision making) or Hidden Fears, Desires, Warnings (for dream interpretation).
+     4. Request the backend for interpretations of the selected cards and display the corresponding interpretations on the frontend.
+
+3. **Card Library Page:**
+  - Users can search and view tarot card meanings.
 
 ## Implementation
 
@@ -75,18 +85,31 @@ Tarot reading is a popular practice for gaining insights and guidance, but many 
 - **Tarot Card Meanings:**
   - A comprehensive library of card meanings, including interpretations for different contexts and positions.
 - **Data Models**
+
   - TarotCard:
+
   ```json
   {
     "name": "The Fool",
     "upright": "New beginnings, adventure, foolishness.",
     "reversed": "Recklessness, fear of change, risk-taking.",
-    "pros": "Indicates new opportunities and a sense of adventure.",
-    "cons": "Warns against recklessness and hasty decisions.",
-    "outcome": "Suggests that taking a leap of faith may lead to growth and new experiences."
+    "interpretations": {
+      "decisionMaking": {
+        "pros": "Indicates new opportunities and a sense of adventure.",
+        "cons": "Warns against recklessness and hasty decisions.",
+        "outcome": "Suggests that taking a leap of faith may lead to growth and new experiences."
+      },
+      "dreamInterpretation": {
+        "hiddenFears": "Fear of taking risks and embracing new beginnings.",
+        "desires": "A strong desire for adventure and new experiences.",
+        "warnings": "Beware of recklessness and making hasty decisions."
+      }
+    }
   }
   ```
+
   - Reading:
+
   ```json
   {
     "date": "2024-06-01",
@@ -118,18 +141,30 @@ Tarot reading is a popular practice for gaining insights and guidance, but many 
   - Retrieves all tarot card meanings.
   - **Example Response:**
 
-    ```json
-    [
-      {
-        "name": "The Fool",
-        "upright": "New beginnings, adventure, foolishness.",
-        "reversed": "Recklessness, fear of change, risk-taking.",
-        "pros": "Indicates new opportunities and a sense of adventure.",
-        "cons": "Warns against recklessness and hasty decisions.",
-        "outcome": "Suggests that taking a leap of faith may lead to growth and new experiences."
-      },
-      ...
+        ```json
+        [
+
+    {
+    "name": "The Fool",
+    "upright": "New beginnings, adventure, foolishness.",
+    "reversed": "Recklessness, fear of change, risk-taking.",
+    "interpretations": {
+    "decisionMaking": {
+    "pros": "Indicates new opportunities and a sense of adventure.",
+    "cons": "Warns against recklessness and hasty decisions.",
+    "outcome": "Suggests that taking a leap of faith may lead to growth and new experiences."
+    },
+    "dreamInterpretation": {
+    "hiddenFears": "Fear of taking risks and embracing new beginnings.",
+    "desires": "A strong desire for adventure and new experiences.",
+    "warnings": "Beware of recklessness and making hasty decisions."
+    }
+    }
+    }
     ]
+
+    ```
+
     ```
 
 - `GET /readings`
@@ -137,25 +172,28 @@ Tarot reading is a popular practice for gaining insights and guidance, but many 
   - Retrieves all saved readings for a user.
   - **Example Response:**
 
-    ```json
-    [
-      {
-        "date": "2024-06-01",
-        "category": "Career Change",
-        "cards": [
-          {"name": "The Fool", "position": "Pros", "interpretation": "Indicates new opportunities and a sense of adventure."},
-          {"name": "The Magician", "position": "Cons", "interpretation": "Warns against overconfidence and manipulation."},
-          {"name": "The High Priestess", "position": "Outcome", "interpretation": "Suggests that intuition and patience will guide you to the right decision."}
-        ]
-      },
-      ...
+        ```json
+        [
+
+    {
+    "date": "2024-06-01",
+    "category": "Career Change",
+    "cards": [
+    {"name": "The Fool", "position": "Pros", "interpretation": "Indicates new opportunities and a sense of adventure."},
+    {"name": "The Magician", "position": "Cons", "interpretation": "Warns against overconfidence and manipulation."},
+    {"name": "The High Priestess", "position": "Outcome", "interpretation": "Suggests that intuition and patience will guide you to the right decision."}
     ]
-    ```
+    },
+    ...
+    ]
+
+        ```
 
 - `POST /readings`
 
   - Saves a new reading.
   - **Example Request:**
+
   ```json
   {
     "date": "2024-06-01",
