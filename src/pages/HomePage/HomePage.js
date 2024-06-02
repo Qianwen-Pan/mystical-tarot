@@ -9,7 +9,7 @@ const HomePage = () => {
 
   return (
     <div>
-      {!category && <CategorySelection setCategory={setCategory} />}
+      <CategorySelection setCategory={setCategory} />
       {category && !cards.length && <CardDeck setCards={setCards} />}
       {cards.length === 3 && <CardInterpretation cards={cards} />}
       <h1>lalal</h1>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import "./CategorySelection.scss";
 
 const CategorySelection = ({ setCategory }) => {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ const CategorySelection = ({ setCategory }) => {
 
   return (
     <div>
-      <h2>Select a Category</h2>
+      <h2 className='category'>Select a Category</h2>
       <button onClick={() => handleSelection('decision')}>Decision Making</button>
       <button onClick={() => handleSelection('dream')}>Dream Interpretation</button>
     </div>
