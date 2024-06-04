@@ -1,43 +1,29 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import "./CardDeck.scss";
+import MainCard from "../MainCard/MainCard";
+import card1 from "../../assets/images/tarot_back.png";
+import card2 from "../../assets/images/tarot_back_purple.png";
+import Card from "../Card/Card";
+const CardDeck = ({}) => {
+  const [shuffle, setShuffle] = useState(false);
 
-const cards = [
-  { id: 1, name: 'Card 1' },
-  { id: 2, name: 'Card 2' },
-  { id: 3, name: 'Card 3' },
-  // Add all tarot cards
-];
-
-const CardDeck = ({ setCards }) => {
-  const navigate = useNavigate();
-  const [selectedCards, setSelectedCards] = useState([]);
-
-  const selectCard = (card) => {
-    if (selectedCards.length < 3) {
-      setSelectedCards([...selectedCards, card]);
-      if (selectedCards.length === 2) {
-        setCards([...selectedCards, card]);
-        
-      }
-    }
+  const handleShuffle = () => {
+    setShuffle(true);
+    setTimeout(() => setShuffle(false), 5000); // Reset shuffle after the animation duration
   };
-
   return (
-    <div>
-      <h2>Select Your Cards</h2>
-      <button onClick={() => setSelectedCards([])}>Shuffle Deck</button>
-      <div className="card-deck">
-        {cards.map(card => (
-          <div
-            key={card.id}
-            onClick={() => selectCard(card)}
-            className="card"
-          >
-            {card.name}
-          </div>
-        ))}
+    <>
+      <div className="App">
+        <header className="App-header">
+          <h1>Your Free Online Tarot Card Reading</h1>
+        </header>
+        <Card shuffle={shuffle} />
+        <h1>lala</h1>
+        <h1>lala</h1>
+        <h1>lala</h1>
+        <button onClick={handleShuffle}>Tap Here</button>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -1,18 +1,14 @@
-import React, { useState } from 'react';
-import CardDeck from '../../components/CardDeck/CardDeck';
-import CardInterpretation from '../../components/CardInterpretation/CardInterpretation';
-import CategorySelection from '../../components/CategorySelection/CategorySelection';
+import React, { useState } from "react";
+import CardDeck from "../../components/CardDeck/CardDeck";
+import "./HomePage.scss";
+import decisionMakingImg from "../../assets/images/glod_black_front_back.png";
+import dreamCardImg from "../../assets/images/gold_tarot_fb.png";
 
 const HomePage = () => {
-  const [category, setCategory] = useState(null);
-  const [cards, setCards] = useState([]);
-
   return (
-    <div>
-      <CategorySelection setCategory={setCategory} />
-      {category && !cards.length && <CardDeck setCards={setCards} />}
-      {cards.length === 3 && <CardInterpretation cards={cards} />}
-      <h1>lalal</h1>
+    <div className="home">
+      <img className="home__cardimage" src={decisionMakingImg} alt=""></img>
+      <img className="home__cardimage" src={dreamCardImg} alt=""></img>
     </div>
   );
 };
