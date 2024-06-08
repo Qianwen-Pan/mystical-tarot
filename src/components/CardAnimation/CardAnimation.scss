@@ -1,0 +1,118 @@
+.card-animation {
+
+    &__cards {
+        position: relative;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        height: 30rem;
+        width: 20rem;
+
+    }
+
+    &__img {
+        height: 30rem;
+        width: 20rem;
+        border-radius: 1rem;
+    }
+
+
+    &__card {
+        position: absolute;
+        // border: 0.5px solid white;
+        animation-iteration-count: infinite; //Loopidy loop it
+        animation-duration: 5s;
+        border-radius: 1rem;
+
+        &--one {
+            animation-name: card-one;
+
+            @keyframes card-one {
+                from {
+                    transform: translate(0) rotate(0deg);
+                }
+
+                50% {
+                    transform: translate(-20rem, 5rem) rotate(-45deg);
+                }
+
+                to {
+                    transform: translate(0) rotate(0deg);
+                }
+            }
+        }
+
+        &--two {
+            animation-name: card-two;
+
+            @keyframes card-two {
+                from {
+                    transform: translate(0) rotate(0deg);
+                }
+
+                50% {
+                    transform: translate(-10rem, 1rem) rotate(-25deg);
+                }
+
+                to {
+                    transform: translate(0) rotate(0deg);
+                }
+            }
+
+        }
+
+        &--three {
+            animation-name: card-three;
+
+            @keyframes card-three {
+                from {
+                    transform: translate(0) rotate(0deg);
+                }
+
+                50% {
+                    transform: rotate(-5deg);
+                }
+
+                to {
+                    transform: translate(0) rotate(0deg);
+                }
+            }
+        }
+
+        &--four {
+            animation-name: card-four;
+
+            @keyframes card-four {
+                from {
+                    transform: translate(0) rotate(0deg);
+                }
+
+                50% {
+                    transform: translate(10rem, 1rem) rotate(15deg);
+                }
+
+                to {
+                    transform: translate(0) rotate(0deg);
+                }
+            }
+        }
+
+        &--five {
+            animation-name: card-five;
+
+            @keyframes card-five {
+                from {
+                    transform: translate(0) rotate(0deg);
+                }
+
+                50% {
+                    transform: translate(20rem, 5rem) rotate(35deg);
+                }
+
+                to {
+                    transform: translate(0) rotate(0deg);
+                }
+            }
+        }
+    }
+}
