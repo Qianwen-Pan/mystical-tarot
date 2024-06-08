@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import CardDeck from "../../components/CardDeck/CardDeck";
 import "./HomePage.scss";
-import decisionMakingImg from "../../assets/images/glod_black_front_back.png";
-import dreamCardImg from "../../assets/images/image-removebg.png";
+import { AnimatePresence, motion } from "framer-motion";
+
+
 
 import theFool from "../../assets/images/aurora_cards/the_fool.png";
 import theEmperor from "../../assets/images/aurora_cards/the_emperor.png";
@@ -22,11 +22,26 @@ const HomePage = () => {
   return (
     <div className="home">
       <div className="home__hero">
-        <div className="home__buttons">
+      <motion.div
+              className="home__buttons"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1, y: [0, -10, 0] }}
+              exit={{ opacity: 0 }}
+              transition={{
+                opacity: { duration: 1 },
+                y: {
+                  duration: 2,
+                  repeat: Infinity,
+                  repeatType: "loop",
+                },
+              }}
+            >
+              {/* <div className="home__buttons"> */}
           <button className="home__button">Decision Making</button>
           <button className="home__button">Dream Interpretaion</button>
-        </div>
-
+        {/* </div> */}
+            </motion.div>
+        
         <CardAnimation images={images} />
       </div>
       {/* <img className="home__cardimage" src={dreamCardImg} alt=""></img>

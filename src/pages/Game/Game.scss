@@ -4,6 +4,7 @@
 
 
 .game {
+
     &__img {
         height: 300px;
         width: 200px;
@@ -26,14 +27,9 @@
     &__card {
         transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         perspective: 1000;
-        -ms-transform: perspective(1000px);
-        -moz-transform: perspective(1000px);
-        -ms-transform-style: preserve-3d;
-        -moz-transform-style: preserve-3d;
         float: left;
         width: 200px;
         height: 300px;
-        // background-color: #eee;
         position: absolute;
         left: 0;
         top: 0;
@@ -141,10 +137,6 @@
         margin-bottom: 1rem;
         @include page-header;
         margin-top: 1rem;
-        // background-color: white;
-        // border-radius: 20%;
-        // padding: 1rem;
-        // width: 20rem;
     }
 
     &__result-list {
@@ -160,13 +152,9 @@
     }
 
     &__result-img {
-        // width: 100%;
-        // height: 100%;
         height: 450px;
         width: 300px;
     }
-
-    &__result-subheader {}
 
     &__result-text {
         width: 18rem;
@@ -205,57 +193,6 @@
 .game__card:nth-child(5n) {
     margin-right: 0;
 }
-
-// .game__card.ani0 {
-//     right: 948px;
-//     bottom: 326px;
-// }
-
-// .game__card.ani1 {
-//     right: 711px;
-//     bottom: 326px;
-// }
-
-// .game__card.ani2 {
-//     right: 474px;
-//     bottom: 326px;
-// }
-
-// .game__card.ani3 {
-//     right: 237px;
-//     bottom: 326px;
-// }
-
-// .game__card.ani4 {
-//     right: 0;
-//     bottom: 326px;
-// }
-
-// .game__card.ani5 {
-//     right: 948px;
-//     bottom: 0;
-// }
-
-// .game__card.ani6 {
-//     right: 711px;
-//     bottom: 0;
-// }
-
-// .game__card.ani7 {
-//     right: 474px;
-//     bottom: 0;
-// }
-
-// .game__card.ani8 {
-//     right: 237px;
-//     bottom: 0;
-// }
-
-// .game__card.ani9 {
-//     right: 0;
-//     bottom: 0;
-// }
-
 
 .game__card.ani0 {
     left: 0px;

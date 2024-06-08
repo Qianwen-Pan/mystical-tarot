@@ -16,7 +16,7 @@ const App = () => {
         <Route path="/game" element={<Game />} />
         <Route path="*" element={<CommingSoon />} />
       </Routes>
-      {/* <Footer /> */}
+      <Footer />
     </BrowserRouter>
   );
 };

@@ -1,5 +1,47 @@
+@use "../../styles/partials/variables"as *;
+@use "../../styles/partials/mixins"as *;
+@use "../../styles/partials/fonts"as *;
 
 
 .footer{
-    height: 10vh;
+    // height: 20rem;    
+    // margin-top: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    padding: 1rem 2rem;
+
+    &__logo{
+        margin: 0;
+        color: white;
+        font-size: 3rem;
+        font-family: $font-mystery;
+    }
+
+    &__text{
+        margin: 1rem ;
+        opacity: 0.7;
+    }
+
+    &__icon{
+        height: 3rem;
+        margin: 1rem 0.5rem;
+    }
+    &__copyright{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &--sign{
+            font-size: 2rem;
+        }
+    }
+
+    &__middle{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 }

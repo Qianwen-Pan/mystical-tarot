@@ -1,18 +1,9 @@
 import "./Game.scss";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import theFool from "../../assets/images/divine/the_fool.png";
-import the_chariot from "../../assets/images/divine/the_chariot.png";
-import the_emperor from "../../assets/images/divine/the_emperor.png";
-import the_empress from "../../assets/images/divine/the_empress.png";
-import stregth from "../../assets/images/divine/stregth.png";
-import the_hermit from "../../assets/images/divine/the_hermit.png";
-import the_hierophant from "../../assets/images/divine/the_hierophant.png";
-import the_high_priestess from "../../assets/images/divine/the_high_priestess.png";
-import the_lovers from "../../assets/images/divine/the_lovers.png";
-import the_magician from "../../assets/images/divine/the_magician.png";
 import card_back from "../../assets/images/tarot_back.png";
 import tarotCards from "../../data/cards";
+
 
 export default function Game() {
   const resultOrder = ["pros", "cons", "outcome"];
