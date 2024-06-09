@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./HomePage.scss";
+import axios from "axios";
 import { motion } from "framer-motion";
+import CardAnimation from "../../components/CardAnimation/CardAnimation";
 
 import theFool from "../../assets/images/aurora_cards/the_fool.png";
 import theEmperor from "../../assets/images/aurora_cards/the_emperor.png";
 import theEmpress from "../../assets/images/aurora_cards/the_empress.png";
 import theHighPrestess from "../../assets/images/aurora_cards/the_high_priestess.png";
 import theMagician from "../../assets/images/aurora_cards/the_magician.png";
-import CardAnimation from "../../components/CardAnimation/CardAnimation";
 import universe from "../../assets/images/universe.png";
 import flower from "../../assets/images/single_flower.png";
 import blue_magician from "../../assets/images/blue_m.png";
 
 const HomePage = () => {
+  const [games, setGames] = useState([]);
   const images = [
     theFool,
     theEmperor,
@@ -20,6 +22,17 @@ const HomePage = () => {
     theHighPrestess,
     theMagician,
   ];
+
+  useEffect(() => {
+    axios.get("http://localhost:8080/games")
+      .then(response => {
+        setGames(response.data);
+      })
+      .catch(error => {
+        console.error("There was an error fetching the games!", error);
+      });
+  }, []);
+
   return (
     <div className="home">
       <div className="home__hero">
@@ -37,16 +50,13 @@ const HomePage = () => {
             },
           }}
         >
-          {/* <div className="home__buttons"> */}
           <button className="home__button">Decision Making</button>
           <button className="home__button">Dream Interpretaion</button>
-          {/* </div> */}
         </motion.div>
-
         <CardAnimation images={images} />
       </div>
       <section className="home__categories">
-        <div className="home__categories-container">
+        {/* <div className="home__categories-container">
           <div className="home__category">
             <img
               className="home__category-image"
@@ -83,7 +93,9 @@ const HomePage = () => {
             />
             <div className="home__category-title">Dream Interpretation</div>
             <div className="home__category-modal">
-              <p className="home__modal-title">Tarot for Dream Interpretation</p>
+              <p className="home__modal-title">
+                Tarot for Dream Interpretation
+              </p>
               <p className="home__category-description">
                 Unveil the hidden meanings in your dreams.
               </p>
@@ -97,7 +109,9 @@ const HomePage = () => {
             />
             <div className="home__category-title">Dream Interpretation</div>
             <div className="home__category-modal">
-              <p className="home__modal-title">Tarot for Dream Interpretation</p>
+              <p className="home__modal-title">
+                Tarot for Dream Interpretation
+              </p>
               <p className="home__category-description">
                 Unveil the hidden meanings in your dreams.
               </p>
@@ -111,12 +125,32 @@ const HomePage = () => {
             />
             <div className="home__category-title">Dream Interpretation</div>
             <div className="home__category-modal">
-              <p className="home__modal-title">Tarot for Dream Interpretation</p>
+              <p className="home__modal-title">
+                Tarot for Dream Interpretation
+              </p>
               <p className="home__category-description">
                 Unveil the hidden meanings in your dreams.
               </p>
             </div>
           </div>
+        </div> */}
+        <div className="home__categories-container">
+          {games.map(game => (
+            <div className="home__category" key={game.id}>
+              <img
+                className="home__category-image"
+                src={`http://localhost:8080/${game.image}`}
+                alt={game.name}
+              />
+              <div className="home__category-title">{game.name}</div>
+              <div className="home__category-modal">
+                <p className="home__modal-title">{game.title}</p>
+                <p className="home__category-description">
+                  {game.subTitle}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
     </div>
