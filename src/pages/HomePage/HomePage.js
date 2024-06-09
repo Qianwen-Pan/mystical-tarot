@@ -53,10 +53,12 @@ const HomePage = () => {
               src={universe}
               alt="universe card"
             />
+            <div className="home__category-title">Decision Making</div>
             <div className="home__category-modal">
-              <p>Tarot for Decision Making</p>
-              <p className="home__category-description">Discover insights to guide your choices.</p>
-
+              <p className="home__modal-title">Tarot for Decision Making</p>
+              <p className="home__category-description">
+                Discover insights to guide your choices.
+              </p>
             </div>
           </div>
           <div className="home__category">
@@ -65,10 +67,12 @@ const HomePage = () => {
               src={blue_magician}
               alt="blue version of magician card"
             />
+            <div className="home__category-title">Card of the Day</div>
             <div className="home__category-modal">
-              <p>Card of the Day</p>
-              <p className="home__category-description">Discover insights to guide your choices.</p>
-
+              <p className="home__modal-title">Card of the Day</p>
+              <p className="home__category-description">
+                Discover insights to guide your choices.
+              </p>
             </div>
           </div>
           <div className="home__category">
@@ -77,10 +81,40 @@ const HomePage = () => {
               src={flower}
               alt="a flower tarot card"
             />
+            <div className="home__category-title">Dream Interpretation</div>
             <div className="home__category-modal">
-              <p>Tarot for Dream Interpretation</p> 
-              <p className="home__category-description">Unveil the hidden meanings in your dreams.</p>
-
+              <p className="home__modal-title">Tarot for Dream Interpretation</p>
+              <p className="home__category-description">
+                Unveil the hidden meanings in your dreams.
+              </p>
+            </div>
+          </div>
+          <div className="home__category">
+            <img
+              className="home__category-image"
+              src={flower}
+              alt="a flower tarot card"
+            />
+            <div className="home__category-title">Dream Interpretation</div>
+            <div className="home__category-modal">
+              <p className="home__modal-title">Tarot for Dream Interpretation</p>
+              <p className="home__category-description">
+                Unveil the hidden meanings in your dreams.
+              </p>
+            </div>
+          </div>
+          <div className="home__category">
+            <img
+              className="home__category-image"
+              src={flower}
+              alt="a flower tarot card"
+            />
+            <div className="home__category-title">Dream Interpretation</div>
+            <div className="home__category-modal">
+              <p className="home__modal-title">Tarot for Dream Interpretation</p>
+              <p className="home__category-description">
+                Unveil the hidden meanings in your dreams.
+              </p>
             </div>
           </div>
         </div>
