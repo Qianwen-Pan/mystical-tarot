@@ -1,0 +1,39 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/fonts" as *;
+
+
+.deck{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 3rem;
+
+    &__description{
+        width: 20rem;
+        margin: 0 1.5rem;
+    }
+    &__title{
+        font-family: $font-mystery;
+        color: $light-glod;
+        @include page-header;
+        font-size: 2.5rem;
+
+        
+    }
+
+    &__text{
+        font-family: $font-magic;
+        @include body-copy;
+        width: 80%;
+        margin: 3rem 0;
+        &-right{
+            margin-left: auto;
+        }
+    }
+
+    &__strong{
+        @include subheader;
+        font-family: $font-magic;
+    }
+}

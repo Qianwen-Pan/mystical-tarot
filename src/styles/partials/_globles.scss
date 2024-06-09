@@ -1,0 +1,16 @@
+@use "./fonts";
+@use "./mixins";
+@use "./variables" as *;
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: #0D0D0D;
+    color: white;
+    font-family: $font-magic;
+}
+
+a {
+    text-decoration: none;
+}
