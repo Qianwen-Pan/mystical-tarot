@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./HomePage.scss";
 import axios from "axios";
 import { motion } from "framer-motion";
@@ -9,12 +9,15 @@ import theEmperor from "../../assets/images/aurora_cards/the_emperor.png";
 import theEmpress from "../../assets/images/aurora_cards/the_empress.png";
 import theHighPrestess from "../../assets/images/aurora_cards/the_high_priestess.png";
 import theMagician from "../../assets/images/aurora_cards/the_magician.png";
-import universe from "../../assets/images/universe.png";
-import flower from "../../assets/images/single_flower.png";
-import blue_magician from "../../assets/images/blue_m.png";
+import lockIcon from "../../assets/icons/lock.svg";
+import tarotIcon from "../../assets/icons/7345928_tarot_card_fortune_astrology_divination_icon.svg";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
   const [games, setGames] = useState([]);
+  const navigate = useNavigate();
+  const gamesSectionRef = useRef(null);
+
   const images = [
     theFool,
     theEmperor,
@@ -24,14 +27,23 @@ const HomePage = () => {
   ];
 
   useEffect(() => {
-    axios.get("http://localhost:8080/games")
-      .then(response => {
+    axios
+      .get("http://localhost:8080/games")
+      .then((response) => {
         setGames(response.data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("There was an error fetching the games!", error);
       });
   }, []);
+
+  const handleStart = () => {
+    gamesSectionRef.current.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleModalClick = (id) => {
+    navigate(`/games/${id}`);
+  };
 
   return (
     <div className="home">
@@ -50,92 +62,17 @@ const HomePage = () => {
             },
           }}
         >
-          <button className="home__button">Decision Making</button>
-          <button className="home__button">Dream Interpretaion</button>
+          <button className="home__button" onClick={handleStart}>
+            Start my Reading
+          </button>
+          <button className="home__button">Card of the Day</button>
         </motion.div>
         <CardAnimation images={images} />
       </div>
-      <section className="home__categories">
-        {/* <div className="home__categories-container">
-          <div className="home__category">
-            <img
-              className="home__category-image"
-              src={universe}
-              alt="universe card"
-            />
-            <div className="home__category-title">Decision Making</div>
-            <div className="home__category-modal">
-              <p className="home__modal-title">Tarot for Decision Making</p>
-              <p className="home__category-description">
-                Discover insights to guide your choices.
-              </p>
-            </div>
-          </div>
-          <div className="home__category">
-            <img
-              className="home__category-image"
-              src={blue_magician}
-              alt="blue version of magician card"
-            />
-            <div className="home__category-title">Card of the Day</div>
-            <div className="home__category-modal">
-              <p className="home__modal-title">Card of the Day</p>
-              <p className="home__category-description">
-                Discover insights to guide your choices.
-              </p>
-            </div>
-          </div>
-          <div className="home__category">
-            <img
-              className="home__category-image"
-              src={flower}
-              alt="a flower tarot card"
-            />
-            <div className="home__category-title">Dream Interpretation</div>
-            <div className="home__category-modal">
-              <p className="home__modal-title">
-                Tarot for Dream Interpretation
-              </p>
-              <p className="home__category-description">
-                Unveil the hidden meanings in your dreams.
-              </p>
-            </div>
-          </div>
-          <div className="home__category">
-            <img
-              className="home__category-image"
-              src={flower}
-              alt="a flower tarot card"
-            />
-            <div className="home__category-title">Dream Interpretation</div>
-            <div className="home__category-modal">
-              <p className="home__modal-title">
-                Tarot for Dream Interpretation
-              </p>
-              <p className="home__category-description">
-                Unveil the hidden meanings in your dreams.
-              </p>
-            </div>
-          </div>
-          <div className="home__category">
-            <img
-              className="home__category-image"
-              src={flower}
-              alt="a flower tarot card"
-            />
-            <div className="home__category-title">Dream Interpretation</div>
-            <div className="home__category-modal">
-              <p className="home__modal-title">
-                Tarot for Dream Interpretation
-              </p>
-              <p className="home__category-description">
-                Unveil the hidden meanings in your dreams.
-              </p>
-            </div>
-          </div>
-        </div> */}
+      <section className="home__categories" ref={gamesSectionRef}>
+        <h1 className="home__section-title">Tarot Games</h1>
         <div className="home__categories-container">
-          {games.map(game => (
+          {games.map((game) => (
             <div className="home__category" key={game.id}>
               <img
                 className="home__category-image"
@@ -143,14 +80,32 @@ const HomePage = () => {
                 alt={game.name}
               />
               <div className="home__category-title">{game.name}</div>
-              <div className="home__category-modal">
+              <div
+                className={`home__category-modal ${
+                  game.isLocked ? "home__category-modal--locked" : ""
+                }`}
+                onClick={() => handleModalClick(game.id)}
+              >
                 <p className="home__modal-title">{game.title}</p>
-                <p className="home__category-description">
-                  {game.subTitle}
-                </p>
+                <p className="home__category-description">{game.subTitle}</p>
+                {game.isLocked && (
+                  <img
+                    src={lockIcon}
+                    alt="Locked"
+                    className="home__lock-icon"
+                  />
+                )}
               </div>
             </div>
           ))}
+          <div className="home__explore-more">
+            <img
+              src={tarotIcon}
+              alt="Explore More"
+              className="home__explore-icon"
+            />
+            <p className="home__explore-text">Explore More {">"} </p>
+          </div>
         </div>
       </section>
     </div>
