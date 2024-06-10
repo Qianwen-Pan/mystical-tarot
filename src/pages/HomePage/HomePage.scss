@@ -51,7 +51,7 @@
             align-items: center;
             flex-direction: row;
             flex-wrap: wrap;
-            gap: 2rem;
+            gap: 3rem;
 
         }
 
@@ -92,12 +92,15 @@
             display: flex;
             flex-direction: column;
             text-align: center;
+            cursor: pointer;
 
-            
+            &--locked {
+                opacity: 1;
+                visibility: visible;
+              }
 
         }
         
-
         &-title {
             position: absolute;
             bottom: 0;
@@ -139,6 +142,41 @@
         &-title{
             font-size: 1.5rem;
         }
+    }
+
+    &__explore-more{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+        margin-left: 5rem;
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out;
+
+        &:hover{
+            transform: scale(1.1);
+        }
+    }
+
+    &__explore-icon{
+        width: 3rem;
+        height: 3rem;
+    }
+
+    &__explore-text{
+        margin-top: 1rem;
+        font-size: 1.2em;
+        font-weight: bold;
+        color: white;
+    }
+
+    &__section-title{
+        font-family: $font-mystery;
+        font-size: 2.5rem;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
 }

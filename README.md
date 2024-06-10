@@ -18,10 +18,9 @@ Tarot reading is a popular practice for gaining insights and guidance, but many 
 
 ### Features
 
-1.  **Daily Tarot Card:**
+1.  **Card of the Day**
 
-    - Users receive a daily tarot card with an interpretation.
-    - Daily readings are logged and can be reviewed in a history log.
+  - Users get a daily tarot card with an interpretation.
 
 2. **Tarot Reading Game:**
 

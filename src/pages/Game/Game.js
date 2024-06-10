@@ -1,27 +1,36 @@
 import "./Game.scss";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import card_back from "../../assets/images/tarot_back.png";
-import tarotCards from "../../data/cards";
-
+// import tarotCards from "../../data/cards";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 export default function Game() {
-  const resultOrder = ["pros", "cons", "outcome"];
-
-  const [flippedCards, setFlippedCards] = useState(
-    Array(tarotCards.length).fill(false)
-  );
+  const { id } = useParams(); // Get the game ID from the URL
+  const [gameData, setGameData] = useState(null);
+  const [flippedCards, setFlippedCards] = useState([]);
 
   const [isStacked, setIsStacked] = useState(true);
-  let [count, setCount] = useState(3);
+  let [count, setCount] = useState(0);
   const [showHint, setShowHint] = useState(false);
   const [selectedCards, setSelectedCards] = useState([]);
+
+  useEffect(() => {
+    axios.get(`http://localhost:8080/games/${id}`)
+      .then(response => {
+        setGameData(response.data);
+        setFlippedCards(Array(response.data.cards.length).fill(false)); // Initialize flippedCards based on the number of cards
+      })
+      .catch(error => {
+        console.error("There was an error fetching the game data!", error);
+      });
+  }, [id]);
 
   useEffect(() => {
     if (!isStacked && count > 0) {
       const timer = setTimeout(() => {
         setShowHint(true);
-      }, 2000); // Delay for 2000 milliseconds
+      }, 2000); 
       return () => clearTimeout(timer);
     } else {
       setShowHint(false);
@@ -35,7 +44,7 @@ export default function Game() {
           top: window.innerHeight,
           behavior: "smooth",
         });
-      }, 500); // Wait for animations to complete
+      }, 500); 
     }
   }, [count]);
 
@@ -48,7 +57,6 @@ export default function Game() {
     });
     setFlippedCards(Array(cards.length).fill(false));
     setSelectedCards([]);
-    // Scroll to the top of the page
     window.scrollTo({
       top: 0,
       behavior: "smooth",
@@ -74,16 +82,22 @@ export default function Game() {
       const newFlippedCards = [...flippedCards];
       newFlippedCards[index] = !newFlippedCards[index];
       setFlippedCards(newFlippedCards);
-      setSelectedCards([...selectedCards, tarotCards[index]]);
+      setSelectedCards([...selectedCards, gameData.cards[index]]);
       setCount(count - 1);
     }
   };
+
+  if (!gameData) {
+    return <div>Loading...</div>; 
+  }
+
+  const resultOrder = gameData.cardsRepresent.map(item => item);
 
   return (
     <>
       <div className="game__grid">
         <ul className="game__list">
-          {tarotCards.map((tarotCard, index) => (
+          {gameData.cards.map((tarotCard, index) => (
             <li
               className="game__card"
               key={index}
@@ -98,14 +112,14 @@ export default function Game() {
                 <div className="game__card--back">
                   <img
                     className="game__img"
-                    src={card_back}
+                    src={`http://localhost:8080/${gameData.back_image}`}
                     alt="tarot card back"
                   />
                 </div>
                 <div className="game__card--front">
                   <img
                     className="game__img"
-                    src={tarotCard.image}
+                    src={`http://localhost:8080/${tarotCard.image}`}
                     alt="tarot card front"
                   />
                 </div>
@@ -150,13 +164,9 @@ export default function Game() {
                 },
               }}
             >
-              <p className="game__title">Tarot for Decision Making</p>
+              <p className="game__title">{gameData.title}</p>
               <p className="game__text">
-                Please select 3 cards from the deck. These cards will represent
-                the <span className="game__span"> Pros</span>,{" "}
-                <span className="game__span">Cons</span>, and the{" "}
-                <span className="game__span">Outcome</span> of your decision to
-                help you make an informed choice.
+              {gameData.instruction}
               </p>
               <button className="game__button" onClick={stackCards}>
                 Shuffle
@@ -164,7 +174,6 @@ export default function Game() {
               <button className="game__button" onClick={spreadCards}>
                 Start
               </button>
-              {/* <p>Dream Tarot Interpretation: Please select 3 cards from the deck. These cards will symbolize Hidden Fears, Desires, and Warnings related to your dream, providing deeper insight into its meaning.</p> */}
             </motion.div>
           )}
         </AnimatePresence>
@@ -178,14 +187,14 @@ export default function Game() {
                 <div className="game__result-tag">{resultOrder[index]}</div>
                 <img
                   className="game__result-img"
-                  src={card.image}
+                  src={`http://localhost:8080/${card.image}`}
                   alt={`Selected card ${index + 1}`}
                 />
                 <p className="game__result-name">{card.name}</p>
                 <p className="game__result-text">
                   {
                     card.interpretations.decisionMaking.upright[
-                      resultOrder[index]
+                      resultOrder[index].toLowerCase()
                     ]
                   }
                 </p>

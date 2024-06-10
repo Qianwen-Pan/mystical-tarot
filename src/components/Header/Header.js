@@ -9,7 +9,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 
 const icons = [
-  { id: 'cardIcon', src: cardIcon, alt: "tarot game icon", link: "/game", tooltip: "Tarot Game" },
+  { id: 'cardIcon', src: cardIcon, alt: "tarot game icon", link: "/games", tooltip: "Tarot Game" },
   { id: 'libraryIcon', src: libraryIcon, alt: "tarot library icon", link: "/library", tooltip: "Tarot Library" },
   { id: 'searchIcon', src: searchIcon, alt: "tarot search icon", tooltip: "Search" },
   { id: 'magicIcon', src: magicIcon, alt: "tarot about icon", link: "/about", tooltip: "About Magic" },
@@ -33,49 +33,6 @@ const Header = () => {
           <h2 className="header__title">Mystical Tarot</h2>
         </Link>
         <ul className="header__list">
-          {/* <li className="header__item" onMouseEnter={() => handleMouseEnter} onMouseLeave={() => handleMouseLeave}>
-            <Link to="/game">
-              <img
-                className="header__icon"
-                src={cardIcon}
-                alt="tarot game icon"
-              />
-            </Link>
-          </li>
-          <li className="header__item">
-            <Link to="/library">
-              <img
-                className="header__icon"
-                src={libraryIcon}
-                alt="tarot library icon"
-              />
-            </Link>
-          </li>
-          <li className="header__item">
-            <img
-              className="header__icon"
-              src={searchIcon}
-              alt="tarot search icon"
-            />
-          </li>
-          <li className="header__item">
-            <Link to="/about">
-              <img
-                className="header__icon"
-                src={magicIcon}
-                alt="tarot about icon"
-              />
-            </Link>
-          </li>
-          <li className="header__item">
-            <Link to="/">
-              <img
-                className="header__icon"
-                src={starIcon}
-                alt="tarot about icon"
-              />
-            </Link>
-          </li> */}
           {icons.map((icon) => (
             <li
               key={icon.id}
