@@ -11,7 +11,7 @@ export default function Game() {
   const [flippedCards, setFlippedCards] = useState([]);
 
   const [isStacked, setIsStacked] = useState(true);
-  let [count, setCount] = useState(0);
+  let [count, setCount] = useState(null);
   const [showHint, setShowHint] = useState(false);
   const [selectedCards, setSelectedCards] = useState([]);
 
@@ -20,10 +20,12 @@ export default function Game() {
       .then(response => {
         setGameData(response.data);
         setFlippedCards(Array(response.data.cards.length).fill(false)); // Initialize flippedCards based on the number of cards
+        setCount(response.data.cardsNumber);
       })
       .catch(error => {
         console.error("There was an error fetching the game data!", error);
       });
+
   }, [id]);
 
   useEffect(() => {

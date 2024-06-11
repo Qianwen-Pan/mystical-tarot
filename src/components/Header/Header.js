@@ -9,7 +9,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 
 const icons = [
-  { id: 'cardIcon', src: cardIcon, alt: "tarot game icon", link: "/games", tooltip: "Tarot Game" },
+  { id: 'cardIcon', src: cardIcon, alt: "tarot game icon", link: "/games/f6097534-43ec-4a41-97f5-e6c0ed047f44", tooltip: "Tarot Game" },
   { id: 'libraryIcon', src: libraryIcon, alt: "tarot library icon", link: "/library", tooltip: "Tarot Library" },
   { id: 'searchIcon', src: searchIcon, alt: "tarot search icon", tooltip: "Search" },
   { id: 'magicIcon', src: magicIcon, alt: "tarot about icon", link: "/about", tooltip: "About Magic" },

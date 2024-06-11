@@ -1,56 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import { useSprings, animated } from '@react-spring/web';
-import './Card.scss';
-import cardImage from "../../assets/images/tarot_back.png";
+import React from 'react';
+import { motion } from 'framer-motion';
+import "./Card.scss";
 
-const cards = Array(6).fill(null); // Adjust the number of cards as needed
-
-const Deck = ({ shuffle }) => {
-  const [order, setOrder] = useState(cards.map((_, index) => index));
-
-  useEffect(() => {
-    if (shuffle) {
-      const shuffleAnimation = async () => {
-        for (let i = 0; i < 5; i++) {
-          await new Promise((resolve) => setTimeout(resolve, 1000));
-          setOrder((prevOrder) => {
-            const newOrder = [...prevOrder];
-            const card = newOrder.shift();
-            newOrder.push(card);
-            return newOrder;
-          });
-        }
-      };
-      shuffleAnimation();
-    }
-  }, [shuffle]);
-
-  const springs = useSprings(
-    cards.length,
-    cards.map((_, i) => ({
-      to: {
-        transform: `translate3d(0px, ${i * 10}px, 0px)`,
-      },
-      from: {
-        transform: `translate3d(0px, ${order.indexOf(i) * 10}px, 0px)`,
-      },
-      config: { tension: 280, friction: 60 },
-    }))
-  );
-
-  return (
-    <div className="deck-container">
-      {springs.map((styles, index) => (
-        <animated.div
-          key={index}
-          style={{ ...styles, zIndex: cards.length - index }}
-          className="card"
+export default function Card({ card, isExpanded, onClick }) {
+    return (
+        <motion.div 
+            className={`card ${isExpanded ? 'expanded' : ''}`}
+            layout
+            onClick={onClick}
+            initial={{ borderRadius: 10 }}
         >
-          <img src={cardImage} alt="Tarot Card" />
-        </animated.div>
-      ))}
-    </div>
-  );
-};
-
-export default Deck;
+            <motion.img  className={`card__image ${isExpanded ? "card__image--expand" : ""}`} src={`http://localhost:8080/${card.image}`} alt={card.name} layout="responsive" />
+            <div
+                className="card__modal"
+              >
+                <p className="home__modal-title">{card.keywords.join(" • ")}</p>
+                <p className="home__category-description">{card.shortDescription}</p>
+              </div>
+            {isExpanded && (
+                <motion.div className="card-content" layout>
+                    {/* <p><strong>Keywords:</strong> {card.Keywords.join(', ')}</p> */}
+                    {/* <p>{card.shortDescription}</p> */}
+                    <p className='card__detailedDescription'>{card.detailedDescription}</p>
+                </motion.div>
+            )}
+        </motion.div>
+    );
+}

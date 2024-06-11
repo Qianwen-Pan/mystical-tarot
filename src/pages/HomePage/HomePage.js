@@ -4,11 +4,11 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import CardAnimation from "../../components/CardAnimation/CardAnimation";
 
-import theFool from "../../assets/images/aurora_cards/the_fool.png";
-import theEmperor from "../../assets/images/aurora_cards/the_emperor.png";
-import theEmpress from "../../assets/images/aurora_cards/the_empress.png";
-import theHighPrestess from "../../assets/images/aurora_cards/the_high_priestess.png";
-import theMagician from "../../assets/images/aurora_cards/the_magician.png";
+import theFool from "../../assets/images/divine/the_fool.png";
+import theEmperor from "../../assets/images/divine/the_emperor.png";
+import theEmpress from "../../assets/images/divine/the_empress.png";
+import theHighPrestess from "../../assets/images/divine/the_high_priestess.png";
+import theMagician from "../../assets/images/divine/the_magician.png";
 import lockIcon from "../../assets/icons/lock.svg";
 import tarotIcon from "../../assets/icons/7345928_tarot_card_fortune_astrology_divination_icon.svg";
 import { useNavigate } from "react-router-dom";
@@ -20,10 +20,10 @@ const HomePage = () => {
 
   const images = [
     theFool,
-    theEmperor,
+    theMagician,
     theEmpress,
     theHighPrestess,
-    theMagician,
+    theEmperor,
   ];
 
   useEffect(() => {
